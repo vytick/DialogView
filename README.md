@@ -2,7 +2,8 @@
 Highly customisable dialog (alert) view made in swift
 
 
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")
+![Screenshot 1](https://raw.githubusercontent.com/manGoweb/DialogView/master/_orig/screenshot1.jpg "Screenshot 1")
+![Screenshot 2](https://raw.githubusercontent.com/manGoweb/DialogView/master/_orig/screenshot2.jpg "Screenshot 2")
 
 
 #### Basic usage
