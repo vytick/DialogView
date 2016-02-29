@@ -3,16 +3,15 @@ Pod::Spec.new do |s|
   s.version      = "0.1"
   s.summary      = "Highly customisable dialog (alert) view made in swift"
   s.homepage     = "https://github.com/manGoweb/DialogView"
-  s.screenshots  = "https://raw.githubusercontent.com/vikmeup/SCPopUpView/master/errorScreenshot.png", "https://raw.githubusercontent.com/vikmeup/SCPopUpView/master/successScreenshot.png"
+  s.screenshots  = "https://raw.githubusercontent.com/manGoweb/DialogView/master/_orig/screenshot.jpg"
 
-  # s.license      = "MIT (example)"
   s.license      = { :type => "MIT", :file => "LICENCE" }
-  s.author             = { "Viktor" => "yazexel@gmail.com" }
-  s.social_media_url   = "http://twitter.com/vikmeup"
+  s.author             = { "Ondrej Rafaj" => "developer@mangoweb.cz" }
+  s.social_media_url   = "http://twitter.com/rafiki270"
   s.platform     = :ios
-  s.ios.deployment_target = '8.0'
-  s.source       = { :git => "https://github.com/vikmeup/SCLAlertView-Swift.git", :tag => "0.5.1" }
-  s.source_files  = "SCLAlertView/*"
-  #s.framework  = "QuartzCore"
+  s.ios.deployment_target = '8.1'
+  s.source       = { :git => "https://github.com/manGoweb/DialogView.git", :tag => "0.1" }
+  s.source_files  = "Classes/*"
+  s.dependency = 'SnapKit'
   s.requires_arc = true
 end
