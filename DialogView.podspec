@@ -9,22 +9,16 @@
 Pod::Spec.new do |s|
   s.name             = "DialogView"
   s.version          = "0.1.0"
-  s.summary          = "A short description of DialogView."
+  s.summary          = "Highly customisable dialog (alert) view made in swift."
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = <<-DESC
-                       DESC
+  s.description      = "You can customise pretty much anything prom inner paddings and margins to all colors and views. Please refer to the README.md for instructions"
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/DialogView"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/manGoweb/DialogView"
+  s.screenshots     = "https://raw.githubusercontent.com/manGoweb/DialogView/master/_orig/screenshot1.jpg", "https://raw.githubusercontent.com/manGoweb/DialogView/master/_orig/screenshot2.jpg"
   s.license          = 'MIT'
-  s.author           = { "Ondrej Rafaj" => "ondrej.rafaj@fuerteint.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/DialogView.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { "Ondrej Rafaj" => "rafaj@mangoweb.cz" }
+  s.source           = { :git => "https://github.com/manGoweb/DialogView.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/rafiki270'
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true

@@ -58,7 +58,7 @@ pod "DialogView"
 
 #### Author
 
-Ondrej Rafaj, ondrej.rafaj@fuerteint.com
+Ondrej Rafaj, manGoweb.cz <software@mangoweb.cz>
 
 #### License
 
