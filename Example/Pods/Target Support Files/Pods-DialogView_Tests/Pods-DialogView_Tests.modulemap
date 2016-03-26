@@ -1,0 +1,6 @@
+framework module Pods_DialogView_Tests {
+  umbrella header "Pods-DialogView_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

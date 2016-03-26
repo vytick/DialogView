@@ -1,0 +1,30 @@
+{
+  "name": "DialogView",
+  "version": "0.1.0",
+  "summary": "A short description of DialogView.",
+  "description": "",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/DialogView",
+  "license": "MIT",
+  "authors": {
+    "Ondrej Rafaj": "ondrej.rafaj@fuerteint.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/DialogView.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "DialogView": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "dependencies": {
+    "SnapKit": [
+      "~> 0.19.1"
+    ]
+  }
+}

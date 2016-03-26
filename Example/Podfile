@@ -3,6 +3,7 @@ use_frameworks!
 
 target 'DialogView_Example', :exclusive => true do
   pod 'DialogView', :path => '../'
+  pod 'SnapKit', '~> 0.19.1'
 end
 
 target 'DialogView_Tests', :exclusive => true do
@@ -12,4 +13,5 @@ target 'DialogView_Tests', :exclusive => true do
   pod 'Nimble', '~> 3.0'
   pod 'FBSnapshotTestCase'
   pod 'Nimble-Snapshots'
+  pod 'SnapKit', '~> 0.19.1'
 end

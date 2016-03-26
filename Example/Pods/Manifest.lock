@@ -1,0 +1,37 @@
+PODS:
+  - DialogView (0.1.0):
+    - SnapKit (~> 0.19.1)
+  - FBSnapshotTestCase (2.0.7):
+    - FBSnapshotTestCase/SwiftSupport (= 2.0.7)
+  - FBSnapshotTestCase/Core (2.0.7)
+  - FBSnapshotTestCase/SwiftSupport (2.0.7):
+    - FBSnapshotTestCase/Core
+  - Nimble (3.2.0)
+  - Nimble-Snapshots (3.0.0):
+    - FBSnapshotTestCase (~> 2.0.7)
+    - Nimble
+    - Quick
+  - Quick (0.9.1)
+  - SnapKit (0.19.1)
+
+DEPENDENCIES:
+  - DialogView (from `../`)
+  - FBSnapshotTestCase
+  - Nimble (~> 3.0)
+  - Nimble-Snapshots
+  - Quick (~> 0.8)
+  - SnapKit (~> 0.19.1)
+
+EXTERNAL SOURCES:
+  DialogView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DialogView: b9c00d641890646dc5a4b7bba705633131f61f94
+  FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
+  Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
+  Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
+  Quick: a5221fc21788b6aeda934805e68b061839bc3165
+  SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
+
+COCOAPODS: 0.39.0

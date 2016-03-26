@@ -1,17 +1,53 @@
 # DialogView
+Highly customisable dialog (alert) view made in swift. You can customise pretty much anything prom inner paddings and margins to all colors and views.
 
-[![CI Status](http://img.shields.io/travis/Ondrej Rafaj/DialogView.svg?style=flat)](https://travis-ci.org/Ondrej Rafaj/DialogView)
-[![Version](https://img.shields.io/cocoapods/v/DialogView.svg?style=flat)](http://cocoapods.org/pods/DialogView)
-[![License](https://img.shields.io/cocoapods/l/DialogView.svg?style=flat)](http://cocoapods.org/pods/DialogView)
-[![Platform](https://img.shields.io/cocoapods/p/DialogView.svg?style=flat)](http://cocoapods.org/pods/DialogView)
 
-## Usage
+![Screenshot 1](https://raw.githubusercontent.com/manGoweb/DialogView/master/_orig/screenshot1.jpg "Screenshot 1")
+![Screenshot 2](https://raw.githubusercontent.com/manGoweb/DialogView/master/_orig/screenshot2.jpg "Screenshot 2")
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+#### Basic usage
+``` swift
+let alert: DialogView = DialogView()
+alert.setTitle("Dialog Title")
+alert.setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a augue eget felis dictum ultrices ac a arcu.")
 
-## Installation
+let button: DialogButton = alert.addButton("Ok", type: .Done)
+button.addTarget(self, action: "myAlertAction:", forControlEvents: .TouchUpInside)
+alert.showInController(self)
+```
+
+#### Advanced usage
+``` swift
+let alert: DialogView = DialogView()
+
+var attr: [String: AnyObject] = [String: AnyObject]();
+attr[NSFontAttributeName] = UIFont.init(name: "HelveticaNeue-Light", size: 16)!
+alert.setTitle("Dialog Title", attributes: attr)
+
+attr[NSFontAttributeName] = UIFont.init(name: "HelveticaNeue-UltraLight", size: 14)!
+alert.setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a augue eget felis dictum ultrices ac a arcu.", attributes: attr)
+
+var button: DialogButton = alert.addButton("Accept", type: .Accept)
+button.addTarget(self, action: "myAlertAction:", forControlEvents: .TouchUpInside)
+button.titleLabel?.font = UIFont.init(name: "HelveticaNeue-Light", size: 14)!
+
+button = alert.addButton("Delete", type: .Destruct)
+button.addTarget(self, action: "myAlertAction:", forControlEvents: .TouchUpInside)
+button.titleLabel?.font = UIFont.init(name: "HelveticaNeue-Light", size: 14)!
+
+button = alert.addButton("Done", type: .Done)
+button.addTarget(self, action: "myAlertAction:", forControlEvents: .TouchUpInside)
+button.titleLabel?.font = UIFont.init(name: "HelveticaNeue-Light", size: 14)!
+
+button = alert.addButton("Default", type: .Default)
+button.addTarget(self, action: "myAlertAction:", forControlEvents: .TouchUpInside)
+button.titleLabel?.font = UIFont.init(name: "HelveticaNeue-Light", size: 14)!
+
+alert.showInController(self)
+```
+
+#### Installation
 
 DialogView is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
@@ -20,10 +56,16 @@ it, simply add the following line to your Podfile:
 pod "DialogView"
 ```
 
-## Author
+#### Author
 
 Ondrej Rafaj, ondrej.rafaj@fuerteint.com
 
-## License
+#### License
 
 DialogView is available under the MIT license. See the LICENSE file for more info.
+
+#### TODO
+* Different animations
+* Custom controls in the canvas
+* More predefined styles
+* Any more ideas? :)
