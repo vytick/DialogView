@@ -92,7 +92,7 @@ public class DialogView : UIView {
     private func createLabels(inout lastElement: UIView?) {
         // Title label
         if titleLabel != nil {
-            titleLabel = self.label(title!, attributes: titleAttributes, bold: true)
+            titleLabel = self.label(title!, textAttributes: titleAttributes, bold: true)
             self.canvasView.addSubview(titleLabel!)
             
             self.titleLabel?.preferredMaxLayoutWidth = (self.dialodViewWidth - (2 * self.innerDialogPadding))
@@ -195,7 +195,7 @@ public class DialogView : UIView {
         self.title = titleString
         self.titleAttributes = attributes
         
-        self.titleLabel = self.label(self.title!, attributes: self.titleAttributes, bold: true)
+        self.titleLabel = self.label(self.title!, textAttributes: self.titleAttributes, bold: true)
         return self.titleLabel!
     }
     
@@ -203,7 +203,7 @@ public class DialogView : UIView {
         self.message = messageString
         self.messageAttributes = attributes
         
-        self.messageLabel = self.label(self.message!, attributes: self.messageAttributes, bold: false)
+        self.messageLabel = self.label(self.message!, textAttributes: self.messageAttributes, bold: false)
         return self.messageLabel!
     }
     
@@ -274,8 +274,10 @@ public class DialogView : UIView {
     
     // MARK: Creating elements
     
-    private func label(text: String, var attributes: [String: AnyObject]?, bold: Bool = false) -> UILabel {
+    private func label(text: String, let textAttributes: [String: AnyObject]?, bold: Bool = false) -> UILabel {
         let label: UILabel = UILabel()
+        
+        var attributes: [String: AnyObject]? = textAttributes
         
         label.backgroundColor = UIColor.clearColor()
         label.textAlignment = .Center
@@ -304,7 +306,7 @@ public class DialogView : UIView {
     private func addCurtainView() {
         self.addSubview(self.curtainView)
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapCurtain:")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DialogView.didTapCurtain(_:)))
         self.curtainView.addGestureRecognizer(tap)
     }
     

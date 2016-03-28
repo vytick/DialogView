@@ -9,9 +9,9 @@ end
 target 'DialogView_Tests' do
   pod 'DialogView', :path => '../'
 
-  pod 'Quick', '~> 0.8'
-  pod 'Nimble', '~> 3.0'
-  pod 'FBSnapshotTestCase'
-  pod 'Nimble-Snapshots'
+#pod 'Quick', '~> 0.8'
+#pod 'Nimble', '~> 3.0'
+#pod 'FBSnapshotTestCase'
+#pod 'Nimble-Snapshots'
   pod 'SnapKit', '~> 0.20.0'
 end
