@@ -16,7 +16,7 @@ install_framework()
     local source="$1"
   fi
 
-  local destination="${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+  local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
 
   if [ -L "${source}" ]; then
       echo "Symlinked..."
@@ -84,18 +84,18 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-DialogView_Tests/DialogView.framework"
-  install_framework "Pods-DialogView_Tests/SnapKit.framework"
-  install_framework "Pods-DialogView_Tests/FBSnapshotTestCase.framework"
-  install_framework "Pods-DialogView_Tests/Nimble.framework"
-  install_framework "Pods-DialogView_Tests/Nimble_Snapshots.framework"
-  install_framework "Pods-DialogView_Tests/Quick.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DialogView/DialogView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSnapshotTestCase/FBSnapshotTestCase.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Nimble/Nimble.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Nimble-Snapshots/Nimble_Snapshots.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Quick/Quick.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-DialogView_Tests/DialogView.framework"
-  install_framework "Pods-DialogView_Tests/SnapKit.framework"
-  install_framework "Pods-DialogView_Tests/FBSnapshotTestCase.framework"
-  install_framework "Pods-DialogView_Tests/Nimble.framework"
-  install_framework "Pods-DialogView_Tests/Nimble_Snapshots.framework"
-  install_framework "Pods-DialogView_Tests/Quick.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DialogView/DialogView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSnapshotTestCase/FBSnapshotTestCase.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Nimble/Nimble.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Nimble-Snapshots/Nimble_Snapshots.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Quick/Quick.framework"
 fi

@@ -1,17 +1,17 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'DialogView_Example', :exclusive => true do
+target 'DialogView_Example' do
   pod 'DialogView', :path => '../'
-  pod 'SnapKit', '~> 0.19.1'
+  pod 'SnapKit', '~> 0.20.0'
 end
 
-target 'DialogView_Tests', :exclusive => true do
+target 'DialogView_Tests' do
   pod 'DialogView', :path => '../'
 
   pod 'Quick', '~> 0.8'
   pod 'Nimble', '~> 3.0'
   pod 'FBSnapshotTestCase'
   pod 'Nimble-Snapshots'
-  pod 'SnapKit', '~> 0.19.1'
+  pod 'SnapKit', '~> 0.20.0'
 end
