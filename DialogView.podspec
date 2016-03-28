@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DialogView"
-  s.version          = "0.1.1"
+  s.version          = "0.1.3"
   s.summary          = "Highly customisable dialog (alert) view made in swift."
 
   s.description      = "You can customise pretty much anything prom inner paddings and margins to all colors and views. Please refer to the README.md for instructions"
