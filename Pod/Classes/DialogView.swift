@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 
 public enum DialogButtonType {
@@ -16,6 +15,10 @@ public enum DialogButtonType {
     case Done
 }
 
+public enum DialogViewButtonAlignment {
+    case Default
+    case OneRow
+}
 
 public class DialogView : UIView {
     
@@ -24,10 +27,12 @@ public class DialogView : UIView {
     
     public var tapOnCurtainClosesDialog: Bool = true
     public var innerDialogPadding: CGFloat = 20
-    public var dialodViewWidth: CGFloat = 240
+    public var dialogViewWidth: CGFloat = 240
     
     public var buttonHeight: CGFloat = 40
     public var buttonPadding: CGFloat = 12
+    
+    public var imageSize: CGSize = CGSizeMake(100, 100)
     
     public var canvasView: UIView = UIView()
     public var curtainView: DialogCurtainView = DialogCurtainView()
@@ -35,9 +40,12 @@ public class DialogView : UIView {
     public var animationDuration: NSTimeInterval = 0.2
     
     public var object: AnyObject? // Can be used for example to store NSIndexPath, CoreData object, etc ...
-    
+    public var isShown = false
+    private var buttonAlignment: DialogViewButtonAlignment = .Default
     
     // MARK: Private variables
+    
+    private var topImageView: UIImageView?
     
     private var title: String?
     private var titleAttributes: [String: AnyObject]?
@@ -59,13 +67,17 @@ public class DialogView : UIView {
         // Add to the controller hidden
         self.hide()
         activeController?.view.addSubview(self)
+        isShown = true
         
         // Setup self autolayout
         self.snp_makeConstraints { (make) -> Void in
              make.edges.equalTo(self.superview!)
         }
         
+        
         var lastElement: UIView?
+        
+        self.createTopImage(&lastElement)
         
         // Add labels
         self.createLabels(&lastElement)
@@ -76,7 +88,7 @@ public class DialogView : UIView {
         // Set canvas size
         self.canvasView.snp_makeConstraints { (make) -> Void in
             make.center.equalTo(self.snp_center)
-            make.width.equalTo(self.dialodViewWidth)
+            make.width.equalTo(self.dialogViewWidth)
             if (lastElement != nil) {
                 make.bottom.equalTo((lastElement?.snp_bottom)!).offset(self.innerDialogPadding)
             }
@@ -89,15 +101,29 @@ public class DialogView : UIView {
         self.showViews()
     }
     
+    private func createTopImage(inout lastElement: UIView?) {
+        if let topImgView = topImageView {
+            canvasView.addSubview(topImgView)
+            topImgView.snp_makeConstraints() {make in
+                make.width.equalTo(imageSize.width)
+                make.height.equalTo(imageSize.height)
+                make.top.equalTo(innerDialogPadding)
+                make.centerX.equalTo(canvasView)
+            }
+            lastElement = topImgView
+        }
+    }
+    
     private func createLabels(inout lastElement: UIView?) {
         // Title label
         if titleLabel != nil {
             titleLabel = self.label(title!, textAttributes: titleAttributes, bold: true)
             self.canvasView.addSubview(titleLabel!)
             
-            self.titleLabel?.preferredMaxLayoutWidth = (self.dialodViewWidth - (2 * self.innerDialogPadding))
+            self.titleLabel?.preferredMaxLayoutWidth = (self.dialogViewWidth - (2 * self.innerDialogPadding))
             self.titleLabel!.snp_makeConstraints{ (make) -> Void in
-                make.left.top.equalTo(self.innerDialogPadding)
+                make.top.equalTo(self.topImageView != nil ? self.topImageView!.snp_bottom : self.canvasView.snp_top).offset(self.innerDialogPadding)
+                make.left.equalTo(self.innerDialogPadding)
                 make.right.equalTo(self.innerDialogPadding * -1)
             }
             
@@ -108,7 +134,7 @@ public class DialogView : UIView {
         if self.messageLabel != nil {
             self.canvasView.addSubview(self.messageLabel!)
             
-            self.messageLabel?.preferredMaxLayoutWidth = (self.dialodViewWidth - (2 * self.innerDialogPadding))
+            self.messageLabel?.preferredMaxLayoutWidth = (self.dialogViewWidth - (2 * self.innerDialogPadding))
             self.messageLabel!.snp_makeConstraints{ (make) -> Void in
                 make.top.equalTo(((self.titleLabel != nil) ? (titleLabel?.snp_bottom)! : self.canvasView.snp_top)).offset(innerDialogPadding)
                 make.left.equalTo(self.innerDialogPadding)
@@ -124,8 +150,33 @@ public class DialogView : UIView {
             var lastButton: DialogButton?
             for b: DialogButton in self.buttons {
                 self.canvasView.addSubview(b)
-                b.snp_makeConstraints(closure: { (make) -> Void in
-                    if lastButton == nil {
+                
+                switch buttonAlignment {
+                    
+                case .Default:
+                    b.snp_makeConstraints() { make in
+                        if lastButton == nil {
+                            if self.messageLabel != nil {
+                                make.top.equalTo((self.messageLabel?.snp_bottom)!).offset(self.innerDialogPadding)
+                            }
+                            else {
+                                if self.titleLabel != nil {
+                                    make.top.equalTo((self.titleLabel?.snp_bottom)!).offset(self.innerDialogPadding)
+                                }
+                                else {
+                                    make.top.equalTo(self.innerDialogPadding)
+                                }
+                            }
+                        }
+                        else {
+                            make.top.equalTo((lastButton?.snp_bottom)!).offset(self.buttonPadding)
+                        }
+                        make.left.equalTo(self.innerDialogPadding)
+                        make.right.equalTo(self.innerDialogPadding * -1)
+                        make.height.equalTo(self.buttonHeight)
+                    }
+                case .OneRow:
+                    b.snp_makeConstraints() { make in
                         if self.messageLabel != nil {
                             make.top.equalTo((self.messageLabel?.snp_bottom)!).offset(self.innerDialogPadding)
                         }
@@ -137,14 +188,17 @@ public class DialogView : UIView {
                                 make.top.equalTo(self.innerDialogPadding)
                             }
                         }
+                        if lastButton == nil {
+                            make.left.equalTo(self.innerDialogPadding)
+                        }
+                        else {
+                            make.left.equalTo((lastButton?.snp_right)!).offset(buttonPadding)
+                        }
+                        make.width.equalTo(((dialogViewWidth - (2 * innerDialogPadding) - (CGFloat(buttons.count - 1) * buttonPadding)) / CGFloat(buttons.count)))
+                        make.height.equalTo(self.buttonHeight)
                     }
-                    else {
-                        make.top.equalTo((lastButton?.snp_bottom)!).offset(self.buttonPadding)
-                    }
-                    make.left.equalTo(self.innerDialogPadding)
-                    make.right.equalTo(self.innerDialogPadding * -1)
-                    make.height.equalTo(self.buttonHeight)
-                })
+                }
+            
                 lastButton = b
                 
                 lastElement = b
@@ -165,6 +219,7 @@ public class DialogView : UIView {
     }
     
     public func hide(animated: Bool) {
+        isShown = false
         if animated == true {
             UIView.animateWithDuration(self.animationDuration, delay: 0.0, options: .BeginFromCurrentState, animations: { () -> Void in
                 self.curtainView.alpha = 0;
@@ -182,6 +237,7 @@ public class DialogView : UIView {
     }
     
     public func hide() {
+        isShown = false
         curtainView.alpha = 0;
         canvasView.alpha = 0;
         curtainView.hidden = true
@@ -190,6 +246,11 @@ public class DialogView : UIView {
     }
     
     // MARK: Configuring view
+    
+    public func setTopImage(image: UIImage) -> UIImageView {
+        topImageView = imageView(image: image)
+        return topImageView!
+    }
     
     public func setTitle(titleString: String, attributes: [String: AnyObject] = [String: AnyObject]()) -> UILabel {
         self.title = titleString
@@ -274,6 +335,13 @@ public class DialogView : UIView {
     
     // MARK: Creating elements
     
+    private func imageView(image image: UIImage?) -> UIImageView {
+        let imgView = UIImageView(image: image)
+        imgView.contentMode = .ScaleAspectFit
+        imgView.clipsToBounds = true
+        return imgView
+    }
+    
     private func label(text: String, let textAttributes: [String: AnyObject]?, bold: Bool = false) -> UILabel {
         let label: UILabel = UILabel()
         
@@ -332,8 +400,9 @@ public class DialogView : UIView {
 
     // MARK: Initialization
     
-    convenience init() {
+    convenience init(buttonAlignment: DialogViewButtonAlignment) {
         self.init(frame:CGRect.zero)
+        self.buttonAlignment = buttonAlignment
     }
     
     override init(frame: CGRect) {
