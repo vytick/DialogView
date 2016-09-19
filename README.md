@@ -64,6 +64,9 @@ let alert: DialogView = DialogView(buttonAlignment: .OneRow)
 
 ```
 
+####It might look like this:
+![Screenshot 3](https://raw.githubusercontent.com/manGoweb/DialogView/master/_orig/screenshot3.jpg "Screenshot 3")
+
 
 #### Installation
 

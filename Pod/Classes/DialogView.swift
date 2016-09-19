@@ -33,7 +33,7 @@ public class DialogView : UIView {
     public var buttonHeight: CGFloat = 40
     public var buttonPadding: CGFloat = 12
     
-    public var imageSize: CGSize = CGSizeMake(100, 100)
+    public var topImageSize: CGSize = CGSizeMake(100, 100)
     
     public var canvasView: UIView = UIView()
     public var curtainView: DialogCurtainView = DialogCurtainView()
@@ -42,7 +42,7 @@ public class DialogView : UIView {
     
     public var object: AnyObject? // Can be used for example to store NSIndexPath, CoreData object, etc ...
     public var isShown = false
-    private var buttonAlignment: DialogViewButtonAlignment = .Default
+    public var buttonAlignment: DialogViewButtonAlignment = .Default
     
     // MARK: Private variables
     
@@ -106,8 +106,8 @@ public class DialogView : UIView {
         if let topImgView = topImageView {
             canvasView.addSubview(topImgView)
             topImgView.snp_makeConstraints() {make in
-                make.width.equalTo(imageSize.width)
-                make.height.equalTo(imageSize.height)
+                make.width.equalTo(topImageSize.width)
+                make.height.equalTo(topImageSize.height)
                 make.top.equalTo(innerDialogPadding)
                 make.centerX.equalTo(canvasView)
             }
