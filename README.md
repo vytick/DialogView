@@ -47,6 +47,24 @@ button.titleLabel?.font = UIFont.init(name: "HelveticaNeue-Light", size: 14)!
 alert.showInController(self)
 ```
 
+#### You can add an image on top of DialogView
+``` swift
+let alert: DialogView = DialogView()
+
+//Title will be under the image
+alert.setTopImage(UIImage(named: "nice_image")!)
+//set size of imageView (sizesToFit)
+alert.imageSize = CGSizeMake(100, 50)
+```
+
+#### You can even have all buttons in one row
+``` swift
+//just use this constructor:
+let alert: DialogView = DialogView(buttonAlignment: .OneRow)
+
+```
+
+
 #### Installation
 
 DialogView is available through [CocoaPods](http://cocoapods.org). To install
