@@ -1,20 +1,20 @@
 PODS:
-  - DialogView (0.1.1):
-    - SnapKit (~> 0.20.0)
-  - SnapKit (0.20.0)
+  - DialogView (0.2.0):
+    - SnapKit (~> 3.0)
+  - SnapKit (3.0.0)
 
 DEPENDENCIES:
   - DialogView (from `../`)
-  - SnapKit (~> 0.20.0)
+  - SnapKit (~> 3.0)
 
 EXTERNAL SOURCES:
   DialogView:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  DialogView: 6ee9afb190d8916094196beae3f1ae7faa5bf071
-  SnapKit: 5fce3c1bbbf1fbd31de9aa92f33eb9fa03f15650
+  DialogView: 448410f7d30f60092bc62b98b072a61a8b80818f
+  SnapKit: 98af0a4e9369d3c58f758967518081dbdc7eb1d9
 
-PODFILE CHECKSUM: 745a7afc48ddc703d332f60a1e90a082b8f72f49
+PODFILE CHECKSUM: 56bad7dc7b58bee02e37a5b8dd070b76c0814759
 
-COCOAPODS: 1.0.0.beta.6
+COCOAPODS: 1.1.0.rc.2

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DialogView"
-  s.version          = "0.1.3"
+  s.version          = "0.2.0"
   s.summary          = "Highly customisable dialog (alert) view made in swift."
 
   s.description      = "You can customise pretty much anything prom inner paddings and margins to all colors and views. Please refer to the README.md for instructions"
@@ -30,5 +30,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'SnapKit', '~> 0.20.0'
+  s.dependency 'SnapKit', '~> 3.0'
 end

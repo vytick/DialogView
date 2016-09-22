@@ -10,59 +10,59 @@ import SnapKit
 
 
 public enum DialogButtonType {
-    case Default
-    case Destruct
-    case Accept
-    case Done
+    case `default`
+    case destruct
+    case accept
+    case done
 }
 
 public enum DialogViewButtonAlignment {
-    case Default
-    case OneRow
+    case `default`
+    case oneRow
 }
 
-public class DialogView : UIView {
+open class DialogView : UIView {
     
     
     // MARK Configuration
     
-    public var tapOnCurtainClosesDialog: Bool = true
-    public var innerDialogPadding: CGFloat = 20
-    public var dialogViewWidth: CGFloat = 240
+    open var tapOnCurtainClosesDialog: Bool = true
+    open var innerDialogPadding: CGFloat = 20
+    open var dialogViewWidth: CGFloat = 240
     
-    public var buttonHeight: CGFloat = 40
-    public var buttonPadding: CGFloat = 12
+    open var buttonHeight: CGFloat = 40
+    open var buttonPadding: CGFloat = 12
     
-    public var topImageSize: CGSize = CGSizeMake(100, 100)
+    open var topImageSize: CGSize = CGSize(width: 100, height: 100)
     
-    public var canvasView: UIView = UIView()
-    public var curtainView: DialogCurtainView = DialogCurtainView()
+    open var canvasView: UIView = UIView()
+    open var curtainView: DialogCurtainView = DialogCurtainView()
     
-    public var animationDuration: NSTimeInterval = 0.2
+    open var animationDuration: TimeInterval = 0.2
     
-    public var object: AnyObject? // Can be used for example to store NSIndexPath, CoreData object, etc ...
-    public var isShown = false
-    public var buttonAlignment: DialogViewButtonAlignment = .Default
+    open var object: AnyObject? // Can be used for example to store NSIndexPath, CoreData object, etc ...
+    open var isShown = false
+    open var buttonAlignment: DialogViewButtonAlignment = .default
     
     // MARK: Private variables
     
-    private var topImageView: UIImageView?
+    fileprivate var topImageView: UIImageView?
     
-    private var title: String?
-    private var titleAttributes: [String: AnyObject]?
-    private var titleLabel: UILabel?
+    fileprivate var title: String?
+    fileprivate var titleAttributes: [String: AnyObject]?
+    fileprivate var titleLabel: UILabel?
     
-    private var message: String?
-    private var messageAttributes: [String: AnyObject]?
-    private var messageLabel: UILabel?
+    fileprivate var message: String?
+    fileprivate var messageAttributes: [String: AnyObject]?
+    fileprivate var messageLabel: UILabel?
     
-    private var buttons: [DialogButton] = [DialogButton]()
-    private var activeController: UIViewController? = nil
+    fileprivate var buttons: [DialogButton] = [DialogButton]()
+    fileprivate var activeController: UIViewController? = nil
     
     
     // MARK: Presenting view
     
-    public func showInController(controller: UIViewController, animated: Bool = true) {
+    open func showInController(_ controller: UIViewController, animated: Bool = true) {
         activeController = controller
         
         // Add to the controller hidden
@@ -102,7 +102,7 @@ public class DialogView : UIView {
         self.showViews()
     }
     
-    private func createTopImage(inout lastElement: UIView?) {
+    fileprivate func createTopImage(_ lastElement: inout UIView?) {
         if let topImgView = topImageView {
             canvasView.addSubview(topImgView)
             topImgView.snp_makeConstraints() {make in
@@ -115,7 +115,7 @@ public class DialogView : UIView {
         }
     }
     
-    private func createLabels(inout lastElement: UIView?) {
+    fileprivate func createLabels(_ lastElement: inout UIView?) {
         // Title label
         if titleLabel != nil {
             titleLabel = self.label(title!, textAttributes: titleAttributes, bold: true)
@@ -146,7 +146,7 @@ public class DialogView : UIView {
         }
     }
     
-    private func createButtons(inout lastElement: UIView?) {
+    fileprivate func createButtons(_ lastElement: inout UIView?) {
         if buttons.count > 0 {
             var lastButton: DialogButton?
             for b: DialogButton in self.buttons {
@@ -154,7 +154,7 @@ public class DialogView : UIView {
                 
                 switch buttonAlignment {
                     
-                case .Default:
+                case .default:
                     b.snp_makeConstraints() { make in
                         if lastButton == nil {
                             if self.messageLabel != nil {
@@ -176,7 +176,7 @@ public class DialogView : UIView {
                         make.right.equalTo(self.innerDialogPadding * -1)
                         make.height.equalTo(self.buttonHeight)
                     }
-                case .OneRow:
+                case .oneRow:
                     b.snp_makeConstraints() { make in
                         if self.messageLabel != nil {
                             make.top.equalTo((self.messageLabel?.snp_bottom)!).offset(self.innerDialogPadding)
@@ -207,11 +207,11 @@ public class DialogView : UIView {
         }
     }
     
-    private func showViews() {
-        curtainView.hidden = false
-        canvasView.hidden = false
+    fileprivate func showViews() {
+        curtainView.isHidden = false
+        canvasView.isHidden = false
         
-        UIView.animateWithDuration(self.animationDuration, delay: 0.0, options: .BeginFromCurrentState, animations: { () -> Void in
+        UIView.animate(withDuration: self.animationDuration, delay: 0.0, options: .beginFromCurrentState, animations: { () -> Void in
             self.curtainView.alpha = 1
             self.canvasView.alpha = 1
             }) { (completed: Bool) -> Void in
@@ -219,15 +219,15 @@ public class DialogView : UIView {
         }
     }
     
-    public func hide(animated: Bool) {
+    open func hide(_ animated: Bool) {
         isShown = false
         if animated == true {
-            UIView.animateWithDuration(self.animationDuration, delay: 0.0, options: .BeginFromCurrentState, animations: { () -> Void in
+            UIView.animate(withDuration: self.animationDuration, delay: 0.0, options: .beginFromCurrentState, animations: { () -> Void in
                 self.curtainView.alpha = 0;
                 self.canvasView.alpha = 0;
                 }, completion: { (completed: Bool) -> Void in
-                    self.curtainView.hidden = true
-                    self.canvasView.hidden = true
+                    self.curtainView.isHidden = true
+                    self.canvasView.isHidden = true
                     self.removeFromSuperview()
                 }
             )
@@ -237,23 +237,23 @@ public class DialogView : UIView {
         }
     }
     
-    public func hide() {
+    open func hide() {
         isShown = false
         curtainView.alpha = 0;
         canvasView.alpha = 0;
-        curtainView.hidden = true
-        canvasView.hidden = true
+        curtainView.isHidden = true
+        canvasView.isHidden = true
         self.removeFromSuperview()
     }
     
     // MARK: Configuring view
     
-    public func setTopImage(image: UIImage) -> UIImageView {
+    open func setTopImage(_ image: UIImage) -> UIImageView {
         topImageView = imageView(image: image)
         return topImageView!
     }
     
-    public func setTitle(titleString: String, attributes: [String: AnyObject] = [String: AnyObject]()) -> UILabel {
+    open func setTitle(_ titleString: String, attributes: [String: AnyObject] = [String: AnyObject]()) -> UILabel {
         self.title = titleString
         self.titleAttributes = attributes
         
@@ -261,7 +261,7 @@ public class DialogView : UIView {
         return self.titleLabel!
     }
     
-    public func setMessage(messageString: String, attributes: [String: AnyObject] = [String: AnyObject]()) -> UILabel {
+    open func setMessage(_ messageString: String, attributes: [String: AnyObject] = [String: AnyObject]()) -> UILabel {
         self.message = messageString
         self.messageAttributes = attributes
         
@@ -269,19 +269,19 @@ public class DialogView : UIView {
         return self.messageLabel!
     }
     
-    public func addButton(button: DialogButton) {
+    open func addButton(_ button: DialogButton) {
         buttons.append(button)
         canvasView.addSubview(button)
     }
     
-    public func addButton(title: String, textColor: UIColor = UIColor.whiteColor(), backgroundColor: UIColor = UIColor.grayColor(), highlightedBackgroundColor: UIColor = UIColor.lightGrayColor(), cornerRadius: CGFloat = 4) -> DialogButton {
+    open func addButton(_ title: String, textColor: UIColor = UIColor.white, backgroundColor: UIColor = UIColor.gray, highlightedBackgroundColor: UIColor = UIColor.lightGray, cornerRadius: CGFloat = 4) -> DialogButton {
         let button: DialogButton = DialogButton()
-        button.setTitle(title, forState: .Normal)
-        button.setTitleColor(textColor, forState: .Normal)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(textColor, for: .normal)
         button.backgroundColor = backgroundColor
         button.layer.cornerRadius = cornerRadius
         button.clipsToBounds = true
-        button.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         
         button.defaultBackgroundColor = backgroundColor
         button.highlightedBackgroundColor = backgroundColor
@@ -292,31 +292,31 @@ public class DialogView : UIView {
         return button
     }
     
-    public func addButton(title: String, type: DialogButtonType) -> DialogButton {
+    open func addButton(_ title: String, type: DialogButtonType) -> DialogButton {
         var textColor: UIColor?
         var backgroundColor: UIColor?
         var highlightedBackgroundColor: UIColor?
         
         switch (type) {
-        case .Accept:
-            textColor = UIColor.whiteColor()
+        case .accept:
+            textColor = UIColor.white
             backgroundColor = UIColor.init(colorLiteralRed: (16 / 255), green: (182 / 255), blue: (113 / 255), alpha: 1)
-            highlightedBackgroundColor = UIColor.lightGrayColor()
+            highlightedBackgroundColor = UIColor.lightGray
             break
-        case .Destruct:
-            textColor = UIColor.whiteColor()
+        case .destruct:
+            textColor = UIColor.white
             backgroundColor = UIColor.init(colorLiteralRed: (195 / 255), green: (36 / 255), blue: (39 / 255), alpha: 1)
-            highlightedBackgroundColor = UIColor.darkGrayColor()
+            highlightedBackgroundColor = UIColor.darkGray
             break
-        case .Done:
-            textColor = UIColor.whiteColor()
-            backgroundColor = UIColor.grayColor()
-            highlightedBackgroundColor = UIColor.darkGrayColor()
+        case .done:
+            textColor = UIColor.white
+            backgroundColor = UIColor.gray
+            highlightedBackgroundColor = UIColor.darkGray
             break
         default:
-            textColor = UIColor.whiteColor()
-            backgroundColor = UIColor.lightGrayColor()
-            highlightedBackgroundColor = UIColor.lightGrayColor()
+            textColor = UIColor.white
+            backgroundColor = UIColor.lightGray
+            highlightedBackgroundColor = UIColor.lightGray
             break
         }
         
@@ -325,7 +325,7 @@ public class DialogView : UIView {
     
     // MARK: Layout
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         // MARK: Curtain
@@ -336,20 +336,20 @@ public class DialogView : UIView {
     
     // MARK: Creating elements
     
-    private func imageView(image image: UIImage?) -> UIImageView {
+    fileprivate func imageView(image: UIImage?) -> UIImageView {
         let imgView = UIImageView(image: image)
-        imgView.contentMode = .ScaleAspectFit
+        imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
         return imgView
     }
     
-    private func label(text: String, let textAttributes: [String: AnyObject]?, bold: Bool = false) -> UILabel {
+    fileprivate func label(_ text: String, textAttributes: [String: AnyObject]?, bold: Bool = false) -> UILabel {
         let label: UILabel = UILabel()
         
         var attributes: [String: AnyObject]? = textAttributes
         
-        label.backgroundColor = UIColor.clearColor()
-        label.textAlignment = .Center
+        label.backgroundColor = UIColor.clear
+        label.textAlignment = .center
         label.numberOfLines = 0
         
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: text)
@@ -357,13 +357,13 @@ public class DialogView : UIView {
             attributes = [String: AnyObject]()
         }
         if attributes![NSFontAttributeName] == nil {
-            attributes![NSFontAttributeName] = (bold ? UIFont.boldSystemFontOfSize(18) : UIFont.systemFontOfSize(14))
+            attributes![NSFontAttributeName] = (bold ? UIFont.boldSystemFont(ofSize: 18) : UIFont.systemFont(ofSize: 14))
         }
         if attributes![NSForegroundColorAttributeName] == nil {
-            attributes![NSForegroundColorAttributeName] = UIColor.darkGrayColor()
+            attributes![NSForegroundColorAttributeName] = UIColor.darkGray
         }
         if attributes![NSBackgroundColorAttributeName] == nil {
-            attributes![NSBackgroundColorAttributeName] = UIColor.clearColor()
+            attributes![NSBackgroundColorAttributeName] = UIColor.clear
         }
         attributedString.addAttributes(attributes!, range: NSRange.init(location: 0, length: text.characters.count))
         
@@ -372,28 +372,28 @@ public class DialogView : UIView {
         return label
     }
     
-    private func addCurtainView() {
+    fileprivate func addCurtainView() {
         self.addSubview(self.curtainView)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DialogView.didTapCurtain(_:)))
         self.curtainView.addGestureRecognizer(tap)
     }
     
-    private func addCanvasView() {
+    fileprivate func addCanvasView() {
         self.canvasView.layer.cornerRadius = 4
-        self.canvasView.backgroundColor = UIColor.whiteColor()
+        self.canvasView.backgroundColor = UIColor.white
         
         self.addSubview(self.canvasView)
     }
     
-    private func addSubviews() {
+    fileprivate func addSubviews() {
         self.addCurtainView()
         self.addCanvasView()
     }
     
     // MARK: Actions
     
-    func didTapCurtain(sender: UITapGestureRecognizer) {
+    func didTapCurtain(_ sender: UITapGestureRecognizer) {
         if (self.tapOnCurtainClosesDialog) {
             self.hide(true)
         }
@@ -421,7 +421,7 @@ public class DialogView : UIView {
 }
 
 
-public class DialogCurtainView : UIView {
+open class DialogCurtainView : UIView {
     
     // MARK: Initialization
     
@@ -442,11 +442,11 @@ public class DialogCurtainView : UIView {
 }
 
 
-public class DialogButton : UIButton {
+open class DialogButton : UIButton {
     
     internal var defaultBackgroundColor: UIColor!
     internal var highlightedBackgroundColor: UIColor!
     
-    public var dialogView: DialogView!
+    open var dialogView: DialogView!
     
 }
