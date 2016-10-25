@@ -1,6 +1,6 @@
 {
   "name": "DialogView",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "summary": "Highly customisable dialog (alert) view made in swift.",
   "description": "You can customise pretty much anything prom inner paddings and margins to all colors and views. Please refer to the README.md for instructions",
   "homepage": "https://github.com/manGoweb/DialogView",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/manGoweb/DialogView.git",
-    "tag": "0.1.1"
+    "tag": "0.2.0"
   },
   "social_media_url": "https://twitter.com/rafiki270",
   "platforms": {
@@ -24,7 +24,7 @@
   "source_files": "Pod/Classes/**/*",
   "dependencies": {
     "SnapKit": [
-      "~> 0.20.0"
+      "~> 3.0"
     ]
   }
 }
