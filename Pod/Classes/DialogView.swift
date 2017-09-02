@@ -284,7 +284,7 @@ open class DialogView : UIView {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         
         button.defaultBackgroundColor = backgroundColor
-        button.highlightedBackgroundColor = backgroundColor
+        button.highlightedBackgroundColor = highlightedBackgroundColor
         button.dialogView = self
         
         self.addButton(button)
